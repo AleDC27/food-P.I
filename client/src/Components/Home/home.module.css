@@ -1,0 +1,9 @@
+.containert{
+    background-image: url('../../assets/Home.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    max-height: max-content;
+    padding-top: 45px;
+}

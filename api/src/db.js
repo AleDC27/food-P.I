@@ -37,7 +37,6 @@ const { Recipe, Diets } = sequelize.models;
 
 //relacion de *---*
 Recipe.belongsToMany(Diets, { through: 'RecipeDiet' });
-
 Diets.belongsToMany(Recipe, { through: 'RecipeDiet' });
 
 module.exports = {

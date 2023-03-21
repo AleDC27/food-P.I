@@ -1,22 +1,13 @@
-const axios=require('axios');
-require("dotenv").config();
-const allRecipes=require('./allRecipes')
+const allRecipes=require('./allRecipes');
 
 const allDiets = async () => {
   const apiFodd = await allRecipes();
   const dietas = apiFodd.map(cur=>cur.diets);
   const uniquesDiets=dietas.reduce((acc,cur)=>acc.concat(cur));
-  console.log(uniquesDiets.length);
   const resultsDiets=[...new Set(uniquesDiets)];
-  console.log(resultsDiets)
+  return resultsDiets
 };
-allDiets()
 module.exports = allDiets;
-
-
-
-
-
 
 
 // const AllDiets = 

@@ -12,7 +12,8 @@ const allRecipes = async () => {
     image:cur.image,
     diets:cur.diets,
     healthScore:cur.healthScore,
-    summary:cur.summary
+    summary:cur.summary,
+    steps:cur.analyzedInstructions
   }})
   return allRecipesResults;
 };

@@ -1,0 +1,25 @@
+.containert{
+    margin: 0;
+    background-image: url('../../assets/Landing\ page.jpg');
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    background-size: cover;
+}
+.button{
+    width: 250px;
+    height: 200px;
+    background-image: url('../../assets/cocina.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.link{
+    text-decoration: none;
+}
+h2{
+    text-decoration: none;
+    position: relative;
+    top: 125px;
+    right: 5px;
+}

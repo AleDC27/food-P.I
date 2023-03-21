@@ -3,8 +3,8 @@ const {Recipe}=require('../../db')
 
 const recipeGetName=async(name)=>{
         const allRecipe=await allRecipes();
-        //const filterName=allRecipe.filter(cur=>cur.name.toLowerCase().includes(name.toLowerCase()))
-        const filterName=allRecipe.filter(cur=>cur.name.toLowerCase()===name.toLowerCase());
+        const filterName=allRecipe.filter(cur=>cur.name.toLowerCase().includes(name.toLowerCase()))
+        //const filterName=allRecipe.filter(cur=>cur.name.toLowerCase()===name.toLowerCase());
         if(filterName.length>0) return filterName;
         
         //buscar en base de datos

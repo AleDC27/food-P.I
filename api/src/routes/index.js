@@ -9,8 +9,10 @@ const allRecipes = require("../controller/allRecipes");
 const recipeId = require("../controller/recipes/recipesId");
 const recipesPost = require("../controller/recipes/recipesPost.js");
 const recipeGetName = require("../controller/recipes/recipesGetName");
+const diets = require('../controller/diets/diets');
 
 const { Recipe } = require("../db");
+const {Diets} = require('../db')
 
 const router = Router();
 
@@ -73,7 +75,7 @@ router.get("/recipes", async (req, res) => {
 //agregar receta por body
 router.post("/recipes", async (req, res) => {
   try {
-    const { name, image, diets, healthScore, summary } = req.body;
+    const { name, image, diets, healthScore, summary,steps } = req.body;
     if (!name || !image || !diets || !healthScore || !summary) {
       return res.status(400).send("missing data to complete");
     }
@@ -83,6 +85,7 @@ router.post("/recipes", async (req, res) => {
       diets,
       healthScore,
       summary,
+      steps
     });
     res.status(201).json(newRecipe);
   } catch (error) {
@@ -92,7 +95,8 @@ router.post("/recipes", async (req, res) => {
 
 router.get("/diets", async (req, res) => {
   try {
-    
+    let result=await diets();
+    res.status(200).json(result)
   } catch (error) {
     res.status(404).send(error.message);
   }
