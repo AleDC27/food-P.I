@@ -1,4 +1,4 @@
-.containert{
+.container{
     background-image: url('../../assets/Home.jpg');
     background-size: cover;
     background-position: center;
@@ -6,4 +6,10 @@
     min-height: 100vh;
     max-height: max-content;
     padding-top: 45px;
+}
+.content_cards{
+    display: flex;
+    flex-wrap: wrap;
+justify-content: space-evenly;
+    width: 100%;
 }

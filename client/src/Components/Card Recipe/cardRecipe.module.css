@@ -1,0 +1,10 @@
+.containerd{
+    border: 2px solid red ;
+    width: 250px;
+    margin-bottom: 3em;
+}
+
+.containerd img{
+    object-fit: cover;
+    width: 250px;
+}

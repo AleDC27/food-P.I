@@ -1,1 +1,0 @@
-export const ALL_RECIPES='ALL_RECIPES';
