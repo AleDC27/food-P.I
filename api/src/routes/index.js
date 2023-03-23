@@ -50,7 +50,6 @@ router.get("/recipesDB", async (req, res) => {
 router.get("/recipes/:idRecipe", async (req, res) => {
   try {
     const { idRecipe } = req.params;
-    if (idRecipe === undefined) return res.status(400).send("No data entered");
     const recipe = await recipeId(idRecipe);
     res.status(200).json(recipe);
   } catch (error) {
@@ -60,10 +59,14 @@ router.get("/recipes/:idRecipe", async (req, res) => {
 
 //buscar receta por nombre por query
 router.get("/recipes", async (req, res) => {
+  console.log("llego")
   try {
     const { name } = req.query;
     if (!name) {
-      return res.status(400).send("No data entered");
+      const allReci = await Recipe.findAll();
+      const allReciApi=await allRecipes()
+      let allResult=allReci.concat(allReciApi);
+      return res.status(400).json(allResult);
     }
     const recipe = await recipeGetName(name);
     res.status(200).send(recipe);

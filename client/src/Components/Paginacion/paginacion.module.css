@@ -1,0 +1,12 @@
+.containerd{
+    display: flex;
+    justify-content: center;
+}
+
+.pag_input{
+    width: 5%;
+}
+
+.containerd button[disabled] {
+    cursor: no-drop;
+}

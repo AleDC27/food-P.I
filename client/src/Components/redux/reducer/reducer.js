@@ -2,7 +2,7 @@ import { ALL_RECIPES } from "../action/actionTypes";
 
 const initialState = {
   recipesAll: [
-    {
+    /* {
       id: 1,
       name: "Cannellini Bean and Asparagus Salad with Mushrooms",
       image: "https://spoonacular.com/recipeImages/782585-312x231.jpg",
@@ -85,16 +85,16 @@ const initialState = {
           image: "https://spoonacular.com/recipeImages/715497-312x231.jpg",
           diets: ["gluten free", "dairy free", "lacto ovo vegetarian", "vegan"],
           healthScore: 64,
-        },
+        },*/
   ],
 };
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
-    case "ALL_RECIPES":
+    case ALL_RECIPES:
       return {
         ...state,
-        recipesAll: [payload],
+        recipesAll: payload,
       };
     default:
       return state;
