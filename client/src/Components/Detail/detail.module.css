@@ -1,0 +1,21 @@
+.containerd{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+}
+
+.contend_card{
+    background: green;
+}
+
+.contend_summary{
+    background: gold;
+}
+
+.content_steps{
+    background: red;
+    display: flex;
+    flex-direction: column;
+
+}

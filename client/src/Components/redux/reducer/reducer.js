@@ -1,9 +1,9 @@
-import { ALL_RECIPES } from "../action/actionTypes";
+import { ALL_RECIPES, DETAIL_ID } from "../action/actionTypes";
 
 const initialState = {
   recipesAll: [
-    /* {
-      id: 1,
+    {
+      id: 782585,
       name: "Cannellini Bean and Asparagus Salad with Mushrooms",
       image: "https://spoonacular.com/recipeImages/782585-312x231.jpg",
       diets: ["gluten free", "dairy free", "lacto ovo vegetarian", "vegan"],
@@ -85,8 +85,9 @@ const initialState = {
           image: "https://spoonacular.com/recipeImages/715497-312x231.jpg",
           diets: ["gluten free", "dairy free", "lacto ovo vegetarian", "vegan"],
           healthScore: 64,
-        },*/
+        },
   ],
+  recipeDetail:null
 };
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -96,6 +97,11 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         recipesAll: payload,
       };
+      case DETAIL_ID:
+        return{
+          ...state,
+          recipeDetail:payload
+        }
     default:
       return state;
   }

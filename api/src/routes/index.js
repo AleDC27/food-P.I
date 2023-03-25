@@ -47,10 +47,10 @@ router.get("/recipesDB", async (req, res) => {
 //716426
 
 //buscar receta por id
-router.get("/recipes/:idRecipe", async (req, res) => {
+router.get("/recipes/:id", async (req, res) => {
   try {
-    const { idRecipe } = req.params;
-    const recipe = await recipeId(idRecipe);
+    const { id } = req.params;
+    const recipe = await recipeId(id);
     res.status(200).json(recipe);
   } catch (error) {
     res.status(404).send(error.message);
