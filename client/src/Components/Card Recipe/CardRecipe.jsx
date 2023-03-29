@@ -11,9 +11,13 @@ export default function CardRecipe(props) {
   return (
       //<Link to={`/detail/${props.id}`} style={{ textDecoration: "none" }}>
     <div className={s.containerd} onClick={handleClick}>
+      <h3 className={s.content_name} >{props.name}</h3>
+      <div className={s.content_img_diets}>
+        <div className={s.content_img}>
       <img src={props.image} alt="image food" />
-      <h1>{props.name}</h1>
-      <span>{props.diets}</span>
+        </div>
+      <div className={s.content_diets} > <h3>Diets:</h3>{props.diets.map(cur=> <h5 key={cur}>{cur}<br/></h5> )}</div>
+      </div>
     </div>
      // </Link>
   )

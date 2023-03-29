@@ -1,37 +1,39 @@
-import React from 'react';
-import s from './landingPage.module.css';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { recipes } from '../redux/action/action';
+import React from "react";
+import s from "./landingPage.module.css";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { recipes } from "../redux/action/action";
+import cocina from "../../assets/cocina.png";
 
-/* export function LandingPage() {
+export function LandingPage() {
   const dispatch=useDispatch();
   const onClickHandler=()=>{
-    console.log("yes")
     dispatch(recipes())
   };
   return (
     <div className={`${s.containert}`}>
-        <div className={s.button}>
-        <Link to='/home' className={s.link} onClick={onClickHandler}>
-          <h2>Home</h2>
+    <div className={s.content_button}>
+      <div className={s.button}>
+        <Link to="/home" className={s.link}  onClick={onClickHandler}>
+          <img src={cocina} alt="img" className={s.img_kitchen} />
         </Link>
-        </div>
-
+      </div>
     </div>
-  )
-}; */
-
-export function LandingPage() {
-
-  return (
-    <div className={`${s.containert}`}>
-        <div className={s.button}>
-        <Link to='/home' className={s.link}>
-          <h2>Home</h2>
-        </Link>
-        </div>
-
-    </div>
+  </div>
   )
 };
+
+/* export function LandingPage() {
+  return (
+    <div className={`${s.containert}`}>
+      <div className={s.content_button}>
+        <div className={s.button}>
+          <Link to="/home" className={s.link}>
+            <img src={cocina} alt="img" className={s.img_kitchen} />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+ */

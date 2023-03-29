@@ -1,25 +1,103 @@
-.containert{
-    margin: 0;
-    background-image: url('../../assets/Landing\ page.jpg');
-    width: 100%;
-    height: 100vh;
-    align-items: center;
-    background-size: cover;
+.containert {
+  background-image: url("../../assets/Landing\ page.jpg");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
 }
-.button{
-    width: 250px;
-    height: 200px;
-    background-image: url('../../assets/cocina.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+
+.content_button{
+  transition: 0.2ms;
 }
-.link{
-    text-decoration: none;
+.content_button :hover{
+  transform: scale(1.05);
 }
-h2{
-    text-decoration: none;
-    position: relative;
-    top: 125px;
-    right: 5px;
+
+.button {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+.button {
+  -webkit-animation: jello-vertical 0.9s both;
+  animation: jello-vertical 0.9s both;
+}
+@-webkit-keyframes jello-vertical {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(0.85, 1.15, 1);
+    transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes jello-vertical {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(0.85, 1.15, 1);
+    transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.link {
+  text-decoration: none;
+  margin-left:50px;
+}
+
+.h2 {
+  color: aliceblue;
+  text-decoration: none;
+  position: relative;
+  top: -90px;
+  right: 5px;
+}
+
+.img_kitchen{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
 }

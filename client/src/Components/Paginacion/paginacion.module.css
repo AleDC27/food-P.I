@@ -1,12 +1,28 @@
-.containerd{
-    display: flex;
-    justify-content: center;
+.containerd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 15px;
+  gap: 5px;
 }
 
-.pag_input{
-    width: 5%;
+.pag_input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
 }
 
+.button_pag {
+  background: #242424;
+  height: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+  box-sizing: content-box;
+}
 .containerd button[disabled] {
-    cursor: no-drop;
+  cursor: no-drop;
+  background: #404040;
 }

@@ -11,14 +11,15 @@ export function Home() {
     console.log(1 + 1);
   });
   const recipesAll = useSelector((state) => state.recipesAll);
+  const copyRecipesAll = useSelector((state) => state.copyRecipesAll);
   console.log(recipesAll);
+  //console.log(copyRecipesAll)
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(9);
   const maxPage = Math.ceil(recipesAll.length / perPage);
 
   return (
     <div className={s.container}>
-      <h1>Home</h1>
       <div className={s.content_cards}>
         {recipesAll.length === 0
           ? null

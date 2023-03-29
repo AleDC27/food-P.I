@@ -1,6 +1,8 @@
 import React from "react";
 import s from "./paginacion.module.css";
 import { useState } from "react";
+import BACK from '../../assets/back.svg';
+import NEXT from '../../assets/next.svg';
 
 export default function Paginacion({ maxPage, page, setPage }) {
   const [input, setInput] = useState(1);
@@ -34,9 +36,8 @@ export default function Paginacion({ maxPage, page, setPage }) {
   };
   return (
     <div className={s.containerd}>
-      <h1>pagina {page}</h1>
-      <button onClick={prevHandler} disabled={page <= 1}>
-        Back
+      <button onClick={prevHandler} disabled={page <= 1} className={s.button_pag}>
+         <img src={BACK} alt="Back" /> 
       </button>
       <input
         className={s.pag_input}
@@ -46,9 +47,9 @@ export default function Paginacion({ maxPage, page, setPage }) {
         onChange={onChangeHandler}
         onKeyDown={onKeyDownHandler}
       />
-      <span>de {maxPage} </span>
-      <button onClick={nextHandler} disabled={page >= maxPage}>
-        Next
+      <span style={{fontSize:"18px",fontFamily:"sans-serif"}} >de {maxPage} </span>
+      <button onClick={nextHandler} disabled={page >= maxPage} className={s.button_pag}>
+        <img src={NEXT} alt="Next" />
       </button>
     </div>
   );

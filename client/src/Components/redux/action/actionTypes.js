@@ -1,2 +1,5 @@
 export const ALL_RECIPES="ALL_RECIPES";
 export const DETAIL_ID="DETAIL_ID";
+export const ORDER_RECIPES="ORDER_RECIPES";
+export const FILTER_RECIPES="FILTER_RECIPES";
+
