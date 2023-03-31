@@ -58,10 +58,11 @@ router.get("/recipes/:id", async (req, res) => {
 });
 
 //buscar receta por nombre por query
+//http://localhost:3001/recipes?name=Cannellini Bean and Asparagus Salad with Mushrooms
 router.get("/recipes", async (req, res) => {
-  console.log("llego")
   try {
     const { name } = req.query;
+    console.log(name)
     if (!name) {
       const allReci = await Recipe.findAll();
       const allReciApi=await allRecipes()

@@ -4,6 +4,7 @@ import { LandingPage } from "./Components/Landing Page/LandingPage.jsx";
 import {Home} from "./Components/Home/Home";
 import Navbar from "./Components/Navbar/Nav";
 import Detail from "./Components/Detail/Detail";
+import CreateRecipe from "./Components/Create Recipe/CreateRecipe";
 
 function App() {
   const location = useLocation();
@@ -13,7 +14,8 @@ function App() {
       <Routes>
         <Route path={"/"} element={<LandingPage/>}/>
         <Route path={"/home"} element={<Home />}/>
-        <Route path={"/detail/:id"} element={<Detail />}/>
+        <Route path={"/detail/:id"} element={<Detail/>}/>
+        <Route path={"/createRecipe"} element={<CreateRecipe/>}/>
       </Routes>
     </div>
   );

@@ -3,6 +3,7 @@ import style from "./nav.module.css";
 import SearchBar from "../SearchBar/SearchBar";
 import { orderRecipes, filterRecipes } from "../redux/action/action";
 import { useDispatch } from "react-redux";
+import {Link} from 'react-router-dom'
 
 export default function Navbar() {
 const dispatch=useDispatch();
@@ -16,10 +17,13 @@ const dispatch=useDispatch();
     <div className={style.content_search}>
       <div>
         <select name="order" onChange={handleDispatch}>
-
           <option value="Default">Default</option>
           <option value="Asendente">Asendente</option>
           <option value="Desendente">Desendente</option>
+          <option value="A-Z">A-Z</option>
+          <option value="Z-A">Z-A</option>
+          <option value="Max health score">Max health score </option>
+          <option value="Min health score">Min health score</option>
         </select>
         <select name="filter" onChange={handleDispatch} >
           <option value="All diets">All diets</option>
@@ -35,6 +39,9 @@ const dispatch=useDispatch();
           <option value="fodmap friendly">fodmap friendly</option>
         </select>
       </div>
+      <Link to='/createRecipe'>
+      Create recipe
+      </Link>
       <SearchBar/>
     </div>
   );

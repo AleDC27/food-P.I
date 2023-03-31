@@ -4,6 +4,7 @@ import {
   DETAIL_ID,
   ORDER_RECIPES,
   FILTER_RECIPES,
+  SEARCH_RECIPE_NAME,
 } from "../action/actionTypes";
 
 const initialState = {
@@ -16,6 +17,14 @@ const initialState = {
       summary:
         'Cannellini Bean and Asparagus Salad with Mushrooms requires approximately <b>45 minutes</b> from start to finish. This main course has <b>482 calories</b>, <b>31g of protein</b>, and <b>6g of fat</b> per serving. This gluten free, dairy free, lacto ovo vegetarian, and vegan recipe serves 6 and costs <b>$1.35 per serving</b>. 309 people were impressed by this recipe. Head to the store and pick up grain mustard, sea salt, lemon zest, and a few other things to make it today. It is brought to you by foodandspice.blogspot.com. Taking all factors into account, this recipe <b>earns a spoonacular score of 70%</b>, which is pretty good. Similar recipes are <a href="https://spoonacular.com/recipes/cannellini-bean-salad-422994">Cannellini Bean Salad</a>, <a href="https://spoonacular.com/recipes/refreshing-cannellini-bean-salad-113127">Refreshing Cannellini Bean Salad</a>, and <a href="https://spoonacular.com/recipes/cannellini-and-green-bean-salad-33177">Cannellini-and-Green Bean Salad</a>.',
       diets: ["gluten free", "dairy free", "lacto ovo vegetarian", "vegan"],
+      dishTypes: [
+        "side dish",
+        "lunch",
+        "main course",
+        "salad",
+        "main dish",
+        "dinner"
+      ],
       steps: [
         {
           number: 1,
@@ -342,9 +351,10 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         recipesAll: payload,
         copyRecipesAll: payload,
-        filterRecipes:payload
+        filterRecipes: payload,
       };
     case DETAIL_ID:
+      console.log(payload)
       return {
         ...state,
         recipeDetail: payload,
@@ -356,7 +366,11 @@ function rootReducer(state = initialState, { type, payload }) {
         if (payload === "Default") return orderNot;
         return orderCopy.sort((a, b) => {
           if (payload === "Asendente") return a.id - b.id;
-          else return b.id - a.id;
+          if (payload === "Desendente") return b.id - a.id;
+          if(payload==="A-Z")return a.name.localeCompare(b.name);
+          if(payload==="Z-A") return b.name.localeCompare(a.name)
+          if(payload==="Max health score") return b.healthScore-a.healthScore;
+          if(payload==="Min health score") return a.healthScore-b.healthScore;
         });
       };
       return {
@@ -365,15 +379,30 @@ function rootReducer(state = initialState, { type, payload }) {
       };
     case FILTER_RECIPES:
       const filterCopy = [...state.copyRecipesAll];
-      const filter =(payload)=>{
-        if(payload==="All diets"){return filterCopy;}
-        let j= filterCopy.filter((cur) => cur.diets.includes(payload));
-        return j
-      } 
+      const filter = (payload) => {
+        if (payload === "All diets") {
+          return filterCopy;
+        }
+        let diets = filterCopy.filter((cur) => cur.diets.includes(payload));
+        return diets;
+      };
       return {
         ...state,
         recipesAll: filter(payload),
         filterRecipes: filter(payload),
+      };
+
+    case SEARCH_RECIPE_NAME:
+      console.log(payload.length);
+      const result = (payload) => {
+        if (payload.length === 0) return state.copyRecipesAll;
+        if (payload.length > 0) return payload;
+        else console.log("not result");
+      };
+
+      return {
+        ...state,
+        recipesAll: result(payload),
       };
     default:
       return state;

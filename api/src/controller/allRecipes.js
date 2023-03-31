@@ -12,6 +12,7 @@ const allRecipes = async () => {
     id:cur.id,
     name:cur.title,
     image:cur.image,
+    dishTypes:cur.dishTypes,
     diets:cur.diets,
     healthScore:cur.healthScore,
     summary:cur.summary.replace(/(<([^>]+)>)/gi, ""),

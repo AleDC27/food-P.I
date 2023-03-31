@@ -1,0 +1,61 @@
+.containerd{
+    padding-top: 40px;
+    background: violet;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form1 {
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+
+  .form{
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .content_img_name_score_diets{
+    display: flex;
+    background: gray;
+    flex-direction: column;
+  }
+ /*  .content_img_name_score_diets{
+
+  } */
+
+  .checkbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+
+  .content_summary{
+    background: gray;
+  }
+
+  .content_steps{
+    display: flex;
+    flex-direction: column;
+    background: gray;
+  }

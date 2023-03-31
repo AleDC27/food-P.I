@@ -1,4 +1,6 @@
-import { ALL_RECIPES, DETAIL_ID, ORDER_RECIPES, FILTER_RECIPES } from "./actionTypes";
+import { ALL_RECIPES, DETAIL_ID, ORDER_RECIPES, FILTER_RECIPES, SEARCH_RECIPE_NAME } from "./actionTypes";
+import axios from 'axios';
+
 
 export function recipes() {
   return async function (dispatch) {
@@ -46,4 +48,22 @@ export function filterRecipes(value){
     type:FILTER_RECIPES,
     payload:value
   }
+};
+
+export function searchRecipeName(name) {
+  return async function (dispatch) {
+    try {
+      console.log(name)
+      await fetch(`http://localhost:3001/recipes?name=${name}`)
+      .then(result=>result.json())
+         .then((data) =>
+          dispatch({
+            type: SEARCH_RECIPE_NAME,
+            payload: data,
+          })
+        ); 
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 }
