@@ -15,6 +15,7 @@ const dispatch=useDispatch();
 
   return (
     <div className={style.content_search}>
+      <Link to='/home' style={{color:"white"}}>Home</Link>
       <div>
         <select name="order" onChange={handleDispatch}>
           <option value="Default">Default</option>
@@ -39,7 +40,7 @@ const dispatch=useDispatch();
           <option value="fodmap friendly">fodmap friendly</option>
         </select>
       </div>
-      <Link to='/createRecipe'>
+      <Link to='/createRecipe'style={{color:"white"}}>
       Create recipe
       </Link>
       <SearchBar/>

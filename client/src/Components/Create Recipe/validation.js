@@ -1,4 +1,4 @@
-const regexOnlyLetters = /^[a-zA-Z]+$/;//solo letras
+const regexOnlyLetters = /^[a-zA-Z\s]+$/;//solo letras
 
 
 export function validation(obj) {
@@ -15,7 +15,7 @@ if(!obj.image){errors.image="Obligatory field"};
 if(!obj.summary){errors.summary="Obligatory field"};
 if(obj.summary.length<50){errors.summary="50 characters minimum"};
 
-if(obj.steps[0].step.length<10){errors.steps="10 characters minimum"}
+if(obj.steps[obj.steps.length-1].step.length<10){errors.steps="10 characters minimum"}
 
 return errors;
 }

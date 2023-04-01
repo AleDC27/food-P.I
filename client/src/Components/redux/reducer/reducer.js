@@ -5,6 +5,7 @@ import {
   ORDER_RECIPES,
   FILTER_RECIPES,
   SEARCH_RECIPE_NAME,
+  CREATE_RECIPE
 } from "../action/actionTypes";
 
 const initialState = {
@@ -404,6 +405,13 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         recipesAll: result(payload),
       };
+    
+    case CREATE_RECIPE:
+      console.log("payload",payload)
+      return{
+        ...state,
+        recipesAll:[...state.recipesAll,payload]
+      }
     default:
       return state;
   }

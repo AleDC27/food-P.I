@@ -34,8 +34,9 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     steps:{
-      type:DataTypes.TEXT,
-      allowNull:false
+      type: DataTypes.ARRAY(DataTypes.JSONB),
+      allowNull: false,
+      defaultValue: [],
     }
   },
     {

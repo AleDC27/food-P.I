@@ -2,8 +2,13 @@ import React from "react";
 import s from "./createRecipe.module.css";
 import { useState } from "react";
 import { validation } from "./validation";
+import {useDispatch} from 'react-redux';
+import { createRecipe } from "../redux/action/action";
 
 export default function CreateRecipe() {
+
+  const dispatch=useDispatch();
+
   const [errors, setErrors] = useState({
     name: null,
     image: null,
@@ -42,7 +47,6 @@ export default function CreateRecipe() {
   };
 
   const handleAddDiets = (e) => {
-    console.log(e.target.value);
     if (recipeData.diets.includes(e.target.value)) {
       setRecipeData({
         ...recipeData,
@@ -113,7 +117,6 @@ export default function CreateRecipe() {
     });
   };
 
-  console.log("ingRecipe", ingRecipe.arr);
   console.log(
     "recipeData",
     recipeData /* .steps[recipeData.steps.length-1].ingredients */
@@ -133,7 +136,7 @@ export default function CreateRecipe() {
         step:e.target.value
       }
       ]
-    })
+    });
     setErrors(validation({
       ...recipeData,
       [e.target.name]:e.target.value
@@ -189,8 +192,40 @@ export default function CreateRecipe() {
     })
   };
 
-  const handleSend = () => {
-    alert("Recipe created successfully");
+  const handleSend = (e) => {
+    e.preventDefault();
+    let flag=Object.values(errors).every(cur=>cur===null);
+    if(!recipeData.name || !recipeData.image ||!recipeData.summary ||recipeData.diets.length===0 ||!flag){
+      return alert("datos por completar 1")
+    }
+    if(flag){
+      setRecipeData({
+        name: "",
+        image: "",
+        diets: [],
+        healthScore: 1,
+        summary: "",
+        steps: [
+          {
+            number: numberStep,
+            step: "",
+            ingredients: [],
+            length: { number: "", unit: "" },
+          },
+        ],
+      });
+      setIngRecipe({
+        str: "",
+        arr: [],
+      });
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+      // Deseleccionar todas las opciones seleccionadas
+      checkboxes.forEach(function(checkbox) {
+        checkbox.checked = false;
+      });
+      dispatch(createRecipe(recipeData))
+    };
   };
   return (
     <div className={s.containerd}>
@@ -212,7 +247,7 @@ export default function CreateRecipe() {
 
             <h3>Type diets</h3>
             <div className={s.checkbox}>
-              <label htmlFor="gluten free<">
+              <label htmlFor="gluten free">
                 <input
                   type="checkbox"
                   id="gluten free"
@@ -395,7 +430,7 @@ export default function CreateRecipe() {
             <button onClick={handleAddStep}>Next step</button>
           </div>
         </div>
-        <input type="submit" value="Send" onClick={handleSend} />
+        <input type="submit" value="send" onClick={handleSend} ></input>
       </form>
     </div>
   );

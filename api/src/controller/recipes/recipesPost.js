@@ -10,7 +10,7 @@ const recipesPost = async ( {name, image, diets, healthScore, summary,steps} ) =
     steps
   });
 
-
+//aca hace la relacion
  diets.forEach(async(diet) => {
   const recipeDiet=await Diets.findOne({where:{name:diet}});
   await postRecipe.addDiets(recipeDiet);
