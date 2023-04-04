@@ -12,12 +12,13 @@ export function Home() {
   });
   const recipesAll = useSelector((state) => state.recipesAll);
   const copyRecipesAll = useSelector((state) => state.copyRecipesAll);
+  const diets = useSelector((state) => state.diets);
   console.log(recipesAll);
   //console.log(copyRecipesAll)
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(9);
   const maxPage = Math.ceil(recipesAll.length / perPage);
-
+  console.log(diets)
   return (
     <div className={s.container}>
       <div className={s.content_cards}>

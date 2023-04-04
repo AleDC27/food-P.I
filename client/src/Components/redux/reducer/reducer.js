@@ -5,7 +5,8 @@ import {
   ORDER_RECIPES,
   FILTER_RECIPES,
   SEARCH_RECIPE_NAME,
-  CREATE_RECIPE
+  CREATE_RECIPE,
+  DIETS
 } from "../action/actionTypes";
 
 const initialState = {
@@ -343,6 +344,7 @@ const initialState = {
   recipeDetail: null,
   copyRecipesAll: [],
   filterRecipes: null,
+  diets:[]
 };
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -411,6 +413,13 @@ function rootReducer(state = initialState, { type, payload }) {
       return{
         ...state,
         recipesAll:[...state.recipesAll,payload]
+      };
+
+    case DIETS:
+      const filterDiets=payload.map(cur=>cur.name);
+      return {
+        ...state,
+        diets:filterDiets
       }
     default:
       return state;

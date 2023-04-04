@@ -2,12 +2,13 @@ import React from "react";
 import s from "./createRecipe.module.css";
 import { useState } from "react";
 import { validation } from "./validation";
-import {useDispatch} from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { createRecipe } from "../redux/action/action";
 
 export default function CreateRecipe() {
-
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
+  const diets = useSelector((state) => state.diets);
+  console.log(diets);
 
   const [errors, setErrors] = useState({
     name: null,
@@ -71,7 +72,7 @@ export default function CreateRecipe() {
       return alert("no pueden repetir ingredientes");
     setIngRecipe({
       ...ingRecipe,
-      str:"",
+      str: "",
       [e.target.name]: [...ingRecipe.arr, e.target.value],
     });
 
@@ -127,20 +128,23 @@ export default function CreateRecipe() {
     setIngRecipe({ ...ingRecipe, [e.target.name]: e.target.value });
   };
 
-  const handleSteps_Step=(e)=>{
+  const handleSteps_Step = (e) => {
     e.preventDefault();
-    setRecipeData({...recipeData,
-      steps:[...recipeData.steps.slice(0,recipeData.steps.length-1),
-      {
-        ...recipeData.steps[recipeData.steps.length - 1],
-        step:e.target.value
-      }
-      ]
-    });
-    setErrors(validation({
+    setRecipeData({
       ...recipeData,
-      [e.target.name]:e.target.value
-     /*  steps: [
+      steps: [
+        ...recipeData.steps.slice(0, recipeData.steps.length - 1),
+        {
+          ...recipeData.steps[recipeData.steps.length - 1],
+          step: e.target.value,
+        },
+      ],
+    });
+    setErrors(
+      validation({
+        ...recipeData,
+        [e.target.name]: e.target.value,
+        /*  steps: [
         //con esto su uvica en el ultimo index
         ...recipeData.steps.slice(0, recipeData.steps.length - 1),
         {
@@ -149,8 +153,9 @@ export default function CreateRecipe() {
           step: e.target.value,
         },
       ], */
-    }))
-  }
+      })
+    );
+  };
   const handleAddStep = (e) => {
     e.preventDefault();
     setNumberStep(++numberStep);
@@ -170,10 +175,10 @@ export default function CreateRecipe() {
       ],
     });
 
-    //este es para el numero de paso el step 
+    //este es para el numero de paso el step
     setRecipeData({
       ...recipeData,
-      
+
       steps: [
         //con esto su uvica en el ultimo index
         ...recipeData.steps.slice(0, recipeData.steps.length - 1),
@@ -181,24 +186,31 @@ export default function CreateRecipe() {
           //ya ubicado en el ultimo index
           ...recipeData.steps[recipeData.steps.length - 1],
           number: numberStep,
-          step:recipeData.steps[recipeData.steps.length - 1].step,
-          ingredients:recipeData.steps[recipeData.steps.length - 1].ingredients
+          step: recipeData.steps[recipeData.steps.length - 1].step,
+          ingredients:
+            recipeData.steps[recipeData.steps.length - 1].ingredients,
         },
       ],
     });
     setIngRecipe({
       str: "",
       arr: [],
-    })
+    });
   };
 
   const handleSend = (e) => {
     e.preventDefault();
-    let flag=Object.values(errors).every(cur=>cur===null);
-    if(!recipeData.name || !recipeData.image ||!recipeData.summary ||recipeData.diets.length===0 ||!flag){
-      return alert("datos por completar 1")
+    let flag = Object.values(errors).every((cur) => cur === null);
+    if (
+      !recipeData.name ||
+      !recipeData.image ||
+      !recipeData.summary ||
+      recipeData.diets.length === 0 ||
+      !flag
+    ) {
+      return alert("datos por completar 1");
     }
-    if(flag){
+    if (flag) {
       setRecipeData({
         name: "",
         image: "",
@@ -221,138 +233,75 @@ export default function CreateRecipe() {
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
       // Deseleccionar todas las opciones seleccionadas
-      checkboxes.forEach(function(checkbox) {
+      checkboxes.forEach(function (checkbox) {
         checkbox.checked = false;
       });
-      dispatch(createRecipe(recipeData))
-    };
+      dispatch(createRecipe(recipeData));
+    }
   };
   return (
     <div className={s.containerd}>
-      <h1>CreateRecipe</h1>
-      <form className={s.form1}>
-        <div className={s.form}>
+      <form className={s.form1} onSubmit={handleSend}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            width: "90%",
+            height: "90%",
+            alignItems: "center",
+          }}
+        >
           <div className={s.content_img_name_score_diets}>
-            <label htmlFor="name">
-              name
+            <label htmlFor="name" className={s.labels}>
+              Name
               <input
+                className={s.input_text}
                 type="text"
                 id="name"
                 name="name"
                 value={recipeData.name}
                 onChange={handleinputChange}
+                autoComplete="off"
               />
             </label>
-            {errors.name ? <span>{errors.name}</span> : null}
+            {errors.name ? <span className={s.errors}>{errors.name}</span> : null}
 
-            <h3>Type diets</h3>
-            <div className={s.checkbox}>
-              <label htmlFor="gluten free">
-                <input
-                  type="checkbox"
-                  id="gluten free"
-                  name="diets"
-                  value="gluten free"
-                  onChange={handleAddDiets}
-                />
-                gluten free
-              </label>
-              <label htmlFor="dairy free">
-                <input
-                  type="checkbox"
-                  id="dairy free"
-                  name="diets"
-                  value="dairy free"
-                  onChange={handleAddDiets}
-                />
-                dairy free
-              </label>
-              <label htmlFor="lacto ovo vegetarian">
-                <input
-                  type="checkbox"
-                  id="lacto ovo vegetarian"
-                  name="diets"
-                  value="lacto ovo vegetarian"
-                  onChange={handleAddDiets}
-                />
-                lacto ovo vegetarian
-              </label>
-              <label htmlFor="vegan">
-                <input
-                  type="checkbox"
-                  id="vegan"
-                  name="diets"
-                  value="vegan"
-                  onChange={handleAddDiets}
-                />
-                vegan
-              </label>
-              <label htmlFor="paleolithic">
-                <input
-                  type="checkbox"
-                  id="paleolithic"
-                  name="diets"
-                  value="paleolithic"
-                  onChange={handleAddDiets}
-                />
-                paleolithic
-              </label>
-              <label htmlFor="primal">
-                <input
-                  type="checkbox"
-                  id="primal"
-                  name="diets"
-                  value="primal"
-                  onChange={handleAddDiets}
-                />
-                primal
-              </label>
-              <label htmlFor="whole 30">
-                <input
-                  type="checkbox"
-                  id="whole 30"
-                  name="diets"
-                  value="whole 30"
-                  onChange={handleAddDiets}
-                />
-                whole 30
-              </label>
-              <label htmlFor="pescatarian">
-                <input
-                  type="checkbox"
-                  id="pescatarian"
-                  name="diets"
-                  value="pescatarian"
-                  onChange={handleAddDiets}
-                />
-                pescatarian
-              </label>
-              <label htmlFor="fodmap friendly">
-                <input
-                  type="checkbox"
-                  id="fodmap friendly"
-                  name="diets"
-                  value="fodmap friendly"
-                  onChange={handleAddDiets}
-                />
-                fodmap friendly
-              </label>
-              <label htmlFor="ketogenic">
-                <input
-                  type="checkbox"
-                  id="ketogenic"
-                  name="diets"
-                  value="ketogenic"
-                  onChange={handleAddDiets}
-                />
-                ketogenic
-              </label>
+            <div style={{textAlign:"start"}}>
+              <h3 style={{ textAlign: "center" }}>Type diets</h3>
+              <div className={s.checkbox}>
+                {diets.length ? (
+                  <div className={s.checkbox}>
+                    {diets.map((cur) => (
+                      <label htmlFor={cur} key={cur}>
+                        <input
+                          type="checkbox"
+                          id={cur}
+                          name="diets"
+                          value={cur}
+                          onChange={handleAddDiets}
+                        />
+                        {cur}
+                      </label>
+                    ))}
+                  </div>
+                ) : (
+                  console.log("nada")
+                )}
+              </div>
               {recipeData.diets.length === 0 ? (
-                <span>{errors.diets}</span>
+                <span
+                  style={{
+                    display:"block",
+                    textAlign: "center",
+                  }}
+                  className={s.errors}
+                >
+                  {errors.diets}
+                </span>
               ) : null}
             </div>
 
-            <label htmlFor="healthScore">
+            <label htmlFor="healthScore" className={s.labels}>
               Health score
               <input
                 type="number"
@@ -360,77 +309,100 @@ export default function CreateRecipe() {
                 name="healthScore"
                 value={recipeData.healthScore}
                 onChange={handleinputChange}
-                style={{ width: "100px" }}
+                style={{ width: "70px", padding: "10px ", textAlign: "center" }}
+                className={s.input_text}
               />
             </label>
-            {errors.healthScore ? <span>{errors.healthScore}</span> : null}
+            {errors.healthScore ? <span className={s.errors}>{errors.healthScore}</span> : null}
 
-            <label htmlFor="image">Image</label>
-            <input
-              type="text"
-              id="image"
-              name="image"
-              value={recipeData.image}
-              onChange={handleinputChange}
-            />
-            {recipeData.image && <button onClick={handleClearImage}>X</button>}
-            {errors.image ? <span>{errors.image}</span> : null}
-            <img src={recipeData.image} alt="" width="100px" />
+            <label htmlFor="image" className={s.labels}>
+              Image
+              <input
+                type="text"
+                id="image"
+                name="image"
+                value={recipeData.image}
+                onChange={handleinputChange}
+                className={s.input_text}
+              />
+              {recipeData.image && (
+                <button onClick={handleClearImage} 
+              className={s.button_img}
+                >X</button>
+              )}
+            </label>
+              {errors.image ? <span className={s.errors}>{errors.image}</span> : null}
+            <img src={recipeData.image} alt="" width="100px" style={{display:"flex",justifyContent:"center",margin:"0 40%",width:"110px"}}/>
           </div>
 
-          <div className={s.content_summary}>
-            <h3>Summary</h3>
-            <textarea
-              name="summary"
-              type="textarea"
-              id="summary"
-              value={recipeData.summary}
-              onChange={handleinputChange}
-            ></textarea>
-            {errors.summary ? <span>{errors.summary}</span> : null}
-          </div>
+          <div className={s.summary_steps}>
+            <div className={s.content_summary}>
+              <b>Summary</b>
+              <textarea
+                name="summary"
+                type="textarea"
+                id="summary"
+                value={recipeData.summary}
+                onChange={handleinputChange}
+              ></textarea>
+              {errors.summary ? <span className={s.errors}>{errors.summary}</span> : null}
+            </div>
 
-          <div className={s.content_steps}>
-            <h3>Steps</h3>
-            <span>step number {recipeData.steps[recipeData.steps.length-1].number} </span>
+            <div className={s.content_steps}>
+              <div className={s.content_steps_step}>
+                <b>
+                  Step number{" "}
+                  {recipeData.steps[recipeData.steps.length - 1].number}{" "}
+                </b>
 
-            <textarea
-              placeholder="Instruction"
-              value={recipeData.steps[recipeData.steps.length-1].step}
-              onChange={handleSteps_Step}
-              name="recipeData.steps[recipeData.steps.length-1].step"
-              cols="30"
-              rows="10"
-            ></textarea>
-            {errors.steps?<span>{errors.steps}</span>:null}
-            <input
-              type="text"
-              placeholder="Ingredients"
-              value={ingRecipe.str}
-              onChange={handleAddIngredient}
-              name="str"
-            />
-            <button onClick={handleClick} value={ingRecipe.str} name="arr">
-              add ingredient
-            </button>
+                <textarea
+                  placeholder="Instruction"
+                  value={recipeData.steps[recipeData.steps.length - 1].step}
+                  onChange={handleSteps_Step}
+                  name="recipeData.steps[recipeData.steps.length-1].step"
+                ></textarea>
+                {errors.steps ? <span className={s.errors}>{errors.steps}</span> : null}
+              </div>
 
-            {recipeData.steps[recipeData.steps.length - 1].ingredients.length > 0 ? (
-              <ul>
-                {recipeData.steps[recipeData.steps.length - 1].ingredients.map((cur) => (
-                  <ol value={cur} key={cur}>
-                    {cur}
-                    <button onClick={handleDeleteIng} value={cur}>
-                      x
-                    </button>
-                  </ol>
-                ))}
-              </ul>
-            ) : null}
+              <div className={s.content_steps_ingredients}>
+                <input
+                  type="text"
+                  placeholder="Ingredients"
+                  value={ingRecipe.str}
+                  onChange={handleAddIngredient}
+                  name="str"
+                  className={s.input_text}
+                />
+                <button onClick={handleClick} value={ingRecipe.str} name="arr" className={s.button_step} style={{marginLeft:"5px"}}>
+                  add ingredient
+                </button>
 
-            <button onClick={handleAddStep}>Next step</button>
+                {recipeData.steps[recipeData.steps.length - 1].ingredients
+                  .length > 0 ? (
+                  <ul style={{}}>
+                    {recipeData.steps[
+                      recipeData.steps.length - 1
+                    ].ingredients.map((cur) => (
+                      <ol value={cur} key={cur}>
+                        {cur}
+                        <button onClick={handleDeleteIng} value={cur} style={{borderRadius:"15px",border:"",background:"transparent"}} >
+                          x
+                        </button>
+                      </ol>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+
+              <button onClick={handleAddStep} className={s.button_step}>Next step</button>
+            </div>
           </div>
         </div>
-        <input type="submit" value="send" onClick={handleSend} ></input>
+        <input
+          type="submit"
+          value="send"
+          className={s.send}
+        ></input>
       </form>
     </div>
   );

@@ -5,6 +5,7 @@ import {
   FILTER_RECIPES,
   SEARCH_RECIPE_NAME,
   CREATE_RECIPE,
+  DIETS
 } from "./actionTypes";
 import axios from "axios";
 
@@ -86,4 +87,18 @@ export function createRecipe(recipe) {
       console.log(error.message);
     }
   };
+}
+
+export function diets(){
+  return async function(dispatch){
+    try {
+      const result=await axios('http://localhost:3001/diets');
+      dispatch({
+        type:DIETS,
+        payload:result.data
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

@@ -44,8 +44,18 @@ router.get("/recipesDB", async (req, res) => {
     res.status(404).json(error);
   }
 });
-//716426
 
+router.get("/dietsDB",async(req,res)=>{
+  try {
+    let dietsType=await Diets.findAll();
+    console.log(dietsType.length)
+    res.status(200).json(dietsType.length)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+})
+
+//716426
 //buscar receta por id
 router.get("/recipes/:id", async (req, res) => {
   try {
@@ -99,6 +109,10 @@ router.post("/recipes", async (req, res) => {
 
 router.get("/diets", async (req, res) => {
   try {
+    let dietsType=await Diets.findAll();
+    if(dietsType.length>0){
+     return res.status(200).json(dietsType)
+    };
     let result=await diets();
     res.status(200).json(result)
   } catch (error) {

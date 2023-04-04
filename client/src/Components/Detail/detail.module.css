@@ -1,52 +1,71 @@
 .containerd{
-    padding-top: 50px;
+    padding: 60px;
     display: flex;
     flex-direction: column;
-    background-color: aqua;
+}
+.link{
+    background: rgba(54, 52, 52, 0.438);
+    color: aliceblue;
+    padding: 5px 8px;
+    border-radius: 20%;
+}
+.link:hover{
+    background: rgb(9, 9, 104)
 }
 
 .contend_card{
-    background: green;
+    border: 2px solid black;
     display: flex;
-    padding: 10px;
-    justify-content: space-evenly;
+    width: 100%;
 }
 
-/* .contend_card_img{
-    
-} */
+.contend_card{
+    width: 100%;
+}
+
+.contend_card_img{
+    height: 200px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contend_card_img img{
+    width: 240px;
+    height: 180px;
+    object-fit: cover;
+}
+
 .contend_card_datos{
-    background: red;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: start;
     padding: 0.2% 1.2%;
-}
-
-.contend_summary_steps{
-    display: flex;
+    height: 200px;
+    width: 100%;
 }
 
 .contend_summary{
-    background: gold;
-    width: 30%;
-    padding: 25px;
+    border: 2px solid rgb(19, 18, 18);
+    width: 100%;
+    padding: 15px 25px;
     text-align: center;
+    margin: 10px 0;
 }
 
 .content_steps{
-    background: red;
-    width: 70%;
+    
     display: flex;
+    justify-content: space-evenly;
     flex-wrap: wrap;
+    padding: 15px;
+}
 
-}
-.content_steps h1{
-    width: 100%;
-}
 .step_card{
     border: 2px solid black;
-    width: 25%;
+    background: rgba(198, 224, 101, 0.466);
+    width: 33%;
     padding: 5px;
+    text-align: start;
 }

@@ -2,13 +2,14 @@ import React from "react";
 import s from "./landingPage.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { recipes } from "../redux/action/action";
+import { recipes, diets } from "../redux/action/action";
 import cocina from "../../assets/cocina.png";
 
 export function LandingPage() {
   const dispatch=useDispatch();
   const onClickHandler=()=>{
-    dispatch(recipes())
+    dispatch(recipes());
+    dispatch(diets())
   };
   return (
     <div className={`${s.containert}`}>
@@ -23,6 +24,7 @@ export function LandingPage() {
   )
 };
 
+//no request
 /* export function LandingPage() {
   return (
     <div className={`${s.containert}`}>
