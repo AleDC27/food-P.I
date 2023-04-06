@@ -44,6 +44,7 @@ export default function CreateRecipe() {
 
   const handleinputChange = (e) => {
     setRecipeData({ ...recipeData, [e.target.name]: e.target.value });
+    console.log(e.target.value);
     setErrors(validation({ ...recipeData, [e.target.name]: e.target.value }));
   };
 
@@ -79,7 +80,7 @@ export default function CreateRecipe() {
     setRecipeData({
       ...recipeData,
       steps: [
-        //con esto su uvica en el ultimo index
+        //con esto su ubica en el ultimo index
         ...recipeData.steps.slice(0, recipeData.steps.length - 1),
         {
           //ya ubicado en el ultimo index
@@ -133,9 +134,12 @@ export default function CreateRecipe() {
     setRecipeData({
       ...recipeData,
       steps: [
+        //no ubicamos en el ultimo indice del array
         ...recipeData.steps.slice(0, recipeData.steps.length - 1),
         {
+        //...con esto copiamos las propiedades del indice de ese array 
           ...recipeData.steps[recipeData.steps.length - 1],
+          //ahora queda modificar las propiedades que precisemos
           step: e.target.value,
         },
       ],
@@ -156,6 +160,24 @@ export default function CreateRecipe() {
       })
     );
   };
+
+  const handleLengthNumber=(e)=>{
+    console.log(e.target.value)
+    setRecipeData({...recipeData,
+    steps:[
+      ...recipeData.steps.slice(0,recipeData.steps.length-1),
+      {
+        ...recipeData.steps[recipeData.steps.length-1],
+        length:{
+          ...recipeData.steps[recipeData.steps.length-1].length,
+          [e.target.name]:e.target.value,
+        }
+      }
+    ]
+    })
+  }
+
+
   const handleAddStep = (e) => {
     e.preventDefault();
     setNumberStep(++numberStep);
@@ -180,7 +202,7 @@ export default function CreateRecipe() {
       ...recipeData,
 
       steps: [
-        //con esto su uvica en el ultimo index
+        //con esto su ubica en el ultimo index
         ...recipeData.steps.slice(0, recipeData.steps.length - 1),
         {
           //ya ubicado en el ultimo index
@@ -189,6 +211,10 @@ export default function CreateRecipe() {
           step: recipeData.steps[recipeData.steps.length - 1].step,
           ingredients:
             recipeData.steps[recipeData.steps.length - 1].ingredients,
+          length:{...recipeData.steps[recipeData.steps.length - 1].length,
+          number:recipeData.steps[recipeData.steps.length - 1].length.number,
+          unit:recipeData.steps[recipeData.steps.length - 1].length.unit,
+          }
         },
       ],
     });
@@ -239,17 +265,13 @@ export default function CreateRecipe() {
       dispatch(createRecipe(recipeData));
     }
   };
+
   return (
     <div className={s.containerd}>
       <form className={s.form1} onSubmit={handleSend}>
         <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            width: "90%",
-            height: "90%",
-            alignItems: "center",
-          }}
+        className={s.from_content}
+
         >
           <div className={s.content_img_name_score_diets}>
             <label htmlFor="name" className={s.labels}>
@@ -332,7 +354,7 @@ export default function CreateRecipe() {
               )}
             </label>
               {errors.image ? <span className={s.errors}>{errors.image}</span> : null}
-            <img src={recipeData.image} alt="" width="100px" style={{display:"flex",justifyContent:"center",margin:"0 40%",width:"110px"}}/>
+            <img src={recipeData.image} alt="" width="100px" style={{display:"flex",justifyContent:"center",margin:"2% 40%",width:"110px"}}/>
           </div>
 
           <div className={s.summary_steps}>
@@ -352,7 +374,7 @@ export default function CreateRecipe() {
               <div className={s.content_steps_step}>
                 <b>
                   Step number{" "}
-                  {recipeData.steps[recipeData.steps.length - 1].number}{" "}
+                  {recipeData.steps[recipeData.steps.length - 1].number}
                 </b>
 
                 <textarea
@@ -392,12 +414,32 @@ export default function CreateRecipe() {
                     ))}
                   </ul>
                 ) : null}
+
+
+              </div>
+              
+              <div style={{display:"flex",width:"100%",justifyContent:"space-between"}}>
+              <button onClick={handleAddStep} className={s.button_step}>Next step</button>
+           
+              <div className={s.length_number_unite}>
+                <label htmlFor="length_number">
+                  <input type="number" placeholder="Time" id="length_number" name="number" value={recipeData.steps[recipeData.steps.length - 1].length.number} onChange={handleLengthNumber}/>
+                </label>
+                <select name="unit" id="" value={recipeData.steps[recipeData.steps.length - 1].length.unit} onChange={handleLengthNumber} className={s.steps_length_time}>
+                  <option value={""}  /* value={recipeData.steps[recipeData.steps.length - 1].length.unit} */>Null</option>
+                  <option value="seconds">Seconds</option>
+                  <option value="minutes">Minutes</option>
+                  <option value="hours">Hours</option>
+                </select>
+              </div>
               </div>
 
-              <button onClick={handleAddStep} className={s.button_step}>Next step</button>
+
+
             </div>
           </div>
         </div>
+
         <input
           type="submit"
           value="send"

@@ -19,11 +19,11 @@ export default function SearchBar() {
    };
 
    return (
-      <>
+      <div style={{display:"flex",justifyContent:"end"}}>
       <form className={`${s.content_buscador}`} onSubmit={handleDispatch}>
          <input className={`${s.buscador}`} type='search' value={value} onChange={handleChange}/>
          <button className={`${s.search_button}`} ><img src={search} id={s.img_search} /></button>
       </form>
-      </>
+      </div>
    );
 }

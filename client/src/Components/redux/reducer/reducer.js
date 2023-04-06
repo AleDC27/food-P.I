@@ -357,10 +357,9 @@ function rootReducer(state = initialState, { type, payload }) {
         filterRecipes: payload,
       };
     case DETAIL_ID:
-      console.log(payload)
       return {
         ...state,
-        recipeDetail: payload,
+        recipeDetail: [payload],
       };
     case ORDER_RECIPES:
       let orderCopy = [...state.recipesAll];

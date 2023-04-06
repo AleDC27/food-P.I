@@ -2,6 +2,8 @@
     padding: 60px;
     display: flex;
     flex-direction: column;
+    ---backgroundCards: rgba(248, 248, 248, 0.479);
+    height: max-content;
 }
 .link{
     background: rgba(54, 52, 52, 0.438);
@@ -17,6 +19,7 @@
     border: 2px solid black;
     display: flex;
     width: 100%;
+    background: var(---backgroundCards);
 }
 
 .contend_card{
@@ -52,10 +55,10 @@
     padding: 15px 25px;
     text-align: center;
     margin: 10px 0;
+    background:var(---backgroundCards)
 }
 
 .content_steps{
-    
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -64,8 +67,38 @@
 
 .step_card{
     border: 2px solid black;
-    background: rgba(198, 224, 101, 0.466);
+    background: var(---backgroundCards);
     width: 33%;
     padding: 5px;
     text-align: start;
+}
+
+
+@media (max-width: 700px){
+    .containerd{
+        padding: 60px 20px 20px 20px ;
+    }
+    .contend_card{
+        flex-direction: column;
+    }
+
+    .contend_card_img{
+        width: 100%;
+    }
+
+    .content_steps{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+    
+    .step_card{
+        border: 2px solid black;
+        background: var(---backgroundCards);
+        width: 100%;
+        padding: 3px;
+        margin: 2px 0;
+        text-align: start;
+    }
 }
