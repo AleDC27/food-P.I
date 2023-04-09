@@ -21,8 +21,9 @@ export function Home() {
   const recipesAll = useSelector((state) => state.recipesAll);
   const copyRecipesAll = useSelector((state) => state.copyRecipesAll);
   const diets = useSelector((state) => state.diets);
-  //console.log(recipesAll);
-  //console.log(copyRecipesAll)
+  console.log("recipeAll",recipesAll);
+
+  console.log("copyRecipe",copyRecipesAll.length)
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(9);
   const maxPage = Math.ceil(recipesAll.length / perPage);
@@ -58,7 +59,13 @@ export function Home() {
           <option value="Min health score">Min health score</option>
         </select>
         <select name="filter" onChange={handleDispatch}>
-          <option value="All diets">All diets</option>
+        <option value="All diets">All diets</option>
+          {diets&&diets.map(cur=>{
+            return <option value={cur} key={cur}>{cur}</option>
+          })}
+
+
+{/*           <option value="All diets">All diets</option>
           <option value="gluten free">gluten free</option>
           <option value="dairy free">dairy free</option>
           <option value="lacto ovo vegetarian">lacto ovo vegetarian</option>
@@ -68,7 +75,7 @@ export function Home() {
           <option value="whole 30">whole 30</option>
           <option value="pescatarian">pescatarian</option>
           <option value="ketogenic">ketogenic</option>
-          <option value="fodmap friendly">fodmap friendly</option>
+          <option value="fodmap friendly">fodmap friendly</option> */}
         </select>
       </div>
 
@@ -77,8 +84,8 @@ export function Home() {
       <div className={s.content_cards}>
         {recipesAll.length === 0
           ? null
-          : recipesAll
-              .slice((page - 1) * perPage, (page - 1) * perPage + perPage)
+          : recipesAll.length>0?
+              recipesAll.slice((page - 1) * perPage, (page - 1) * perPage + perPage)
               .map((cur) => (
                 <CardRecipe
                   key={cur.id}
@@ -90,7 +97,7 @@ export function Home() {
                   healthScore={cur.healthScore}
                   steps={cur.analyzedInstructions}
                 />
-              ))}
+              )):<h1>Not result</h1>}
       </div>
       <Paginacion maxPage={maxPage} page={page} setPage={setPage} />
     </div>

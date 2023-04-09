@@ -11,7 +11,7 @@ import {
 
 const initialState = {
   recipesAll: [
-    {
+/*     {
       healthScore: 100,
       id: 782585,
       name: "Cannellini Bean and Asparagus Salad with Mushrooms",
@@ -339,7 +339,7 @@ const initialState = {
       image: "https://spoonacular.com/recipeImages/715497-312x231.jpg",
       diets: ["gluten free", "dairy free", "lacto ovo vegetarian", "vegan"],
       healthScore: 64,
-    },
+    }, */
   ],
   recipeDetail: null,
   copyRecipesAll: [],
@@ -363,7 +363,10 @@ function rootReducer(state = initialState, { type, payload }) {
       };
     case ORDER_RECIPES:
       let orderCopy = [...state.recipesAll];
-      let orderNot = state.filterRecipes;
+
+      let orderNot = [...state.filterRecipes];
+      
+      console.log("orderNot",orderNot)
       let order = (payload) => {
         if (payload === "Default") return orderNot;
         return orderCopy.sort((a, b) => {
@@ -394,24 +397,31 @@ function rootReducer(state = initialState, { type, payload }) {
         filterRecipes: filter(payload),
       };
 
+
     case SEARCH_RECIPE_NAME:
       console.log(payload.length);
       const result = (payload) => {
-        if (payload.length === 0) return state.copyRecipesAll;
+        if (!Array.isArray(payload)) return "no es array";
         if (payload.length > 0) return payload;
         else console.log("not result");
       };
+      console.log(result(payload))
 
       return {
         ...state,
         recipesAll: result(payload),
       };
     
+
     case CREATE_RECIPE:
       console.log("payload",payload)
       return{
         ...state,
-        recipesAll:[...state.recipesAll,payload]
+        recipesAll:[...state.recipesAll,payload],
+
+        filterRecipes:[...state.filterRecipes,payload],
+        copyRecipesAll:[...state.copyRecipesAll,payload]
+
       };
 
     case DIETS:

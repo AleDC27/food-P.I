@@ -210,7 +210,9 @@ export default function CreateRecipe() {
           number: numberStep,
           step: recipeData.steps[recipeData.steps.length - 1].step,
           ingredients:
+          
             recipeData.steps[recipeData.steps.length - 1].ingredients,
+
           length:{...recipeData.steps[recipeData.steps.length - 1].length,
           number:recipeData.steps[recipeData.steps.length - 1].length.number,
           unit:recipeData.steps[recipeData.steps.length - 1].length.unit,

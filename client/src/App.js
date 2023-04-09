@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar/Nav";
 import Detail from "./Components/Detail/Detail";
 import CreateRecipe from "./Components/Create Recipe/CreateRecipe";
 import About from "./Components/About/About";
+import Error from "./Components/Error/Error";
 
 function App() {
   const location = useLocation();
@@ -18,6 +19,7 @@ function App() {
         <Route path={"/detail/:id"} element={<Detail/>}/>
         <Route path={"about"} element={<About/>}/>
         <Route path={"/createRecipe"} element={<CreateRecipe/>}/>
+        <Route path="*" element={<Error/>}/>
       </Routes>
     </div>
   );

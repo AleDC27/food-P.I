@@ -26,7 +26,7 @@ router.get("/test", (req, res) => {
     res.status(200).send("todo ok");
   } catch (error) {}
 });
-//all
+//all api
 router.get("/allRecipes", async (req, res) => {
   try {
     const results = await allRecipes();
@@ -55,8 +55,7 @@ router.get("/dietsDB",async(req,res)=>{
   }
 })
 
-//716426
-//buscar receta por id
+//buscar receta por id 716426
 router.get("/recipes/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -72,12 +71,11 @@ router.get("/recipes/:id", async (req, res) => {
 router.get("/recipes", async (req, res) => {
   try {
     const { name } = req.query;
-    console.log(name)
     if (!name) {
       const allReci = await Recipe.findAll();
       const allReciApi=await allRecipes()
       let allResult=allReci.concat(allReciApi);
-      return res.status(400).json(allResult);
+      return res.status(200).json(allResult);
     }
     const recipe = await recipeGetName(name);
     res.status(200).send(recipe);

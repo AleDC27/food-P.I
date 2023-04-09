@@ -10,7 +10,6 @@ export default function SearchBar() {
 
    const handleChange=(e)=>{
       setValue(e.target.value)
-      console.log(value)
    };
    const handleDispatch=(e)=>{
       e.preventDefault();

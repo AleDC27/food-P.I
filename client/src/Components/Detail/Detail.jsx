@@ -59,17 +59,17 @@ export default function Detail() {
       {recipeDetail && (
         <div className={s.content_steps}>
           <h3 style={{ width: "100%" }}>Steps</h3>
-          {recipeDetail[0].steps.map((cur) => {
+          {recipeDetail[0].steps&&recipeDetail[0].steps.map((cur) => {
             return (
               <div key={cur.number} className={s.step_card}>
-                <b style={{ width: "100%" }}>Step number {cur.number}: </b>
-                <span>{cur.step}</span>
+                <b style={{ width: "100%" }}>Step number {cur.number?cur.number:null}: </b>
+                <span>{cur.step?cur.step:null}</span>
                 <br />
 
                 <b>Ingredients: </b>
                 { cur.ingredients &&
                   cur.ingredients.map((ing) => {
-                    return <span key={ing.id}>{ing.name},</span>;
+                    return ing.id?<span key={ing.id}>{ing.name},</span>:<span>{ing}</span>;
                   })}
                 . <br />
                 {cur.length && (
