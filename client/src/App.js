@@ -7,6 +7,8 @@ import Detail from "./Components/Detail/Detail";
 import CreateRecipe from "./Components/Create Recipe/CreateRecipe";
 import About from "./Components/About/About";
 import Error from "./Components/Error/Error";
+import axios from 'axios';
+axios.defaults.baseURL='http://localhost:3001/';
 
 function App() {
   const location = useLocation();

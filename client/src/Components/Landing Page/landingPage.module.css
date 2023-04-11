@@ -1,8 +1,9 @@
 .containert {
-  background-image: url("../../assets/Landing\ page.jpg");
+  background-image: url("../../assets/Landing\ page.png");
   width: 100%;
   height: 100vh;
   background-size: cover;
+  background-position: center;
 }
 
 .content_button{
