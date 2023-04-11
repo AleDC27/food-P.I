@@ -8,14 +8,8 @@ const recipeGetName=async(name)=>{
 /*         const recipeDB=await Recipe.findAll({
                 where:{name:{[Op.iLike]:name}}
         }) */
-
-        const recipeDB = await Recipe.findAll({
-                where: {
-                  name: {
-                    [Op.iLike]: `%${name}%`
-                  }
-                }
-              });
+        const recipeDB=await Recipe.findAll();
+        const recipeDBResult=recipeDB.filter(cur=>cur.name.toLowerCase().includes(name.toLowerCase()))
 
         //buscar en api
         const allRecipe=await allRecipes();
@@ -23,8 +17,8 @@ const recipeGetName=async(name)=>{
         //const filterName=allRecipe.filter(cur=>cur.name.toLowerCase()===name.toLowerCase());
         
 
-        if(filterName.length>0 || recipeDB.length>0){
-                let result=await( recipeDB.concat(filterName));
+        if(filterName.length>0 || recipeDBResult.length>0){
+                let result=await( recipeDBResult.concat(filterName));
                 return result;
         } 
 

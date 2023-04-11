@@ -3,7 +3,9 @@
     display: flex;
     flex-direction: column;
     ---backgroundCards: rgba(248, 248, 248, 0.479);
-    height: max-content;
+    min-height: 100vh;
+    max-height: max-content;
+
 }
 .link{
     background: rgba(54, 52, 52, 0.438);

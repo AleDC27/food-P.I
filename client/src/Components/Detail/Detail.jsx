@@ -9,18 +9,18 @@ import Loading from "../Loading/Loaging";
 export default function Detail() {
   const { id } = useParams();
   const recipeDetail = useSelector((state) => state.recipeDetail);
+
+ 
+
   console.log(recipeDetail)
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     dispatch(detailId(id))
     .then(() => setLoading(false))
     .catch(() => setLoading(false));
   }, [id]);
-
-
-
-  //console.log(recipeDetail && recipeDetail.steps);
 
   return (
     <div className={s.containerd}>
@@ -28,10 +28,12 @@ export default function Detail() {
       {recipeDetail===null? null:recipeDetail && (
         <div className={s.contend_card}>
           <div className={s.contend_card_img}>
-            <img src={recipeDetail[0].image} alt="image food" />
+            {recipeDetail[0].image?
+            <img src={recipeDetail[0].image} alt="image food" />:null
+          }
           </div>
           <div className={s.contend_card_datos}>
-            <h1>{recipeDetail[0].name}</h1>
+            <h1>{recipeDetail[0].name?recipeDetail[0].name:null}</h1>
             <h4>Health score : {recipeDetail[0].healthScore}</h4>
             <h4>
               Diets:{" "}
@@ -68,8 +70,8 @@ export default function Detail() {
 
                 <b>Ingredients: </b>
                 { cur.ingredients &&
-                  cur.ingredients.map((ing) => {
-                    return ing.id?<span key={ing.id}>{ing.name},</span>:<span>{ing}</span>;
+                  cur.ingredients.map((ing) => {             
+                     return <span key={ing.id}>{ing.name},</span>
                   })}
                 . <br />
                 {cur.length && (
@@ -82,7 +84,6 @@ export default function Detail() {
           })}
         </div>
       )}
-      <div className={s.content_steps}></div>
     </div>
   );
-}
+};

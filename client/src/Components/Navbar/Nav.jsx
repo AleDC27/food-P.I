@@ -7,7 +7,7 @@ export default function Navbar() {
 const [isOpen,setIsOpen]=useState(false);
 
   return (
-    <div className={s.conteinerd}>
+    <nav className={s.conteinerd}>
 
 
 
@@ -36,6 +36,6 @@ const [isOpen,setIsOpen]=useState(false);
         <span className={s.mainButtonLine} />
         <span className={s.mainButtonLine} />
       </div>
-    </div>
+    </nav>
   );
 }

@@ -69,6 +69,9 @@ export default function CreateRecipe() {
 
   const handleClick = (e) => {
     e.preventDefault();
+
+    if(e.target.value.length===0)return alert("not Null");
+
     if (ingRecipe.arr.includes(e.target.value))
       return alert("no pueden repetir ingredientes");
     setIngRecipe({
@@ -77,6 +80,7 @@ export default function CreateRecipe() {
       [e.target.name]: [...ingRecipe.arr, e.target.value],
     });
 
+    console.log(ingRecipe)
     setRecipeData({
       ...recipeData,
       steps: [
@@ -87,7 +91,8 @@ export default function CreateRecipe() {
           ...recipeData.steps[recipeData.steps.length - 1],
           ingredients: [
             ...recipeData.steps[recipeData.steps.length - 1].ingredients,
-            e.target.value,
+            {id:e.target.value,
+             name:e.target.value}
           ],
         },
       ],
@@ -113,16 +118,11 @@ export default function CreateRecipe() {
           ...recipeData.steps[recipeData.steps.length - 1],
           ingredients: recipeData.steps[
             recipeData.steps.length - 1
-          ].ingredients.filter((cur) => cur !== e.target.value),
+          ].ingredients.filter((cur) => cur.name !== e.target.value),
         },
       ],
     });
   };
-
-  console.log(
-    "recipeData",
-    recipeData /* .steps[recipeData.steps.length-1].ingredients */
-  );
 
   const handleAddIngredient = (e) => {
     e.preventDefault();
@@ -210,9 +210,7 @@ export default function CreateRecipe() {
           number: numberStep,
           step: recipeData.steps[recipeData.steps.length - 1].step,
           ingredients:
-          
             recipeData.steps[recipeData.steps.length - 1].ingredients,
-
           length:{...recipeData.steps[recipeData.steps.length - 1].length,
           number:recipeData.steps[recipeData.steps.length - 1].length.number,
           unit:recipeData.steps[recipeData.steps.length - 1].length.unit,
@@ -236,7 +234,7 @@ export default function CreateRecipe() {
       recipeData.diets.length === 0 ||
       !flag
     ) {
-      return alert("datos por completar 1");
+      return alert("missing data to complete");
     }
     if (flag) {
       setRecipeData({
@@ -266,6 +264,7 @@ export default function CreateRecipe() {
       });
       dispatch(createRecipe(recipeData));
     }
+    return alert("Recipe created successfully")
   };
 
   return (
@@ -401,15 +400,15 @@ export default function CreateRecipe() {
                   add ingredient
                 </button>
 
-                {recipeData.steps[recipeData.steps.length - 1].ingredients
-                  .length > 0 ? (
+                {recipeData.steps[recipeData.steps.length - 1].ingredients.length/* [recipeData.steps[recipeData.steps.length - 1].ingredients.length - 1] */>0
+                  ? (
                   <ul style={{}}>
                     {recipeData.steps[
                       recipeData.steps.length - 1
                     ].ingredients.map((cur) => (
-                      <ol value={cur} key={cur}>
-                        {cur}
-                        <button onClick={handleDeleteIng} value={cur} style={{borderRadius:"15px",border:"",background:"transparent"}} >
+                      <ol value={cur.name} key={cur.name}>
+                        {cur.name}
+                        <button onClick={handleDeleteIng} value={cur.name} style={{borderRadius:"15px",border:"",background:"transparent"}} >
                           x
                         </button>
                       </ol>

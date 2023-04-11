@@ -6,12 +6,12 @@ import {
   FILTER_RECIPES,
   SEARCH_RECIPE_NAME,
   CREATE_RECIPE,
-  DIETS
+  DIETS,
 } from "../action/actionTypes";
 
 const initialState = {
   recipesAll: [
-/*     {
+    /*     {
       healthScore: 100,
       id: 782585,
       name: "Cannellini Bean and Asparagus Salad with Mushrooms",
@@ -344,7 +344,9 @@ const initialState = {
   recipeDetail: null,
   copyRecipesAll: [],
   filterRecipes: null,
-  diets:[]
+  diets: [],
+  recipesApi:[],
+  recipeDB:[]
 };
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -355,6 +357,8 @@ function rootReducer(state = initialState, { type, payload }) {
         recipesAll: payload,
         copyRecipesAll: payload,
         filterRecipes: payload,
+
+        recipesApi:payload
       };
     case DETAIL_ID:
       return {
@@ -365,17 +369,19 @@ function rootReducer(state = initialState, { type, payload }) {
       let orderCopy = [...state.recipesAll];
 
       let orderNot = [...state.filterRecipes];
-      
-      console.log("orderNot",orderNot)
+
+      console.log("orderNot", orderNot);
       let order = (payload) => {
         if (payload === "Default") return orderNot;
         return orderCopy.sort((a, b) => {
           if (payload === "Asendente") return a.id - b.id;
           if (payload === "Desendente") return b.id - a.id;
-          if(payload==="A-Z")return a.name.localeCompare(b.name);
-          if(payload==="Z-A") return b.name.localeCompare(a.name)
-          if(payload==="Max health score") return b.healthScore-a.healthScore;
-          if(payload==="Min health score") return a.healthScore-b.healthScore;
+          if (payload === "A-Z") return a.name.localeCompare(b.name);
+          if (payload === "Z-A") return b.name.localeCompare(a.name);
+          if (payload === "Max health score")
+            return b.healthScore - a.healthScore;
+          if (payload === "Min health score")
+            return a.healthScore - b.healthScore;
         });
       };
       return {
@@ -385,9 +391,21 @@ function rootReducer(state = initialState, { type, payload }) {
     case FILTER_RECIPES:
       const filterCopy = [...state.copyRecipesAll];
       const filter = (payload) => {
-        if (payload === "All diets") {
-          return filterCopy;
-        }
+        if (payload === "All diets") {return filterCopy;};
+        if(payload==="Locales"){
+          if(payload.length>0){
+            return state.recipesApi;
+          }else{
+            return "Not Result"
+          }
+        } 
+        if(payload==="Created"){
+          if(state.recipeDB.length===0){
+            return "Not result"
+          }else{
+            return state.recipeDB;
+          };
+        } 
         let diets = filterCopy.filter((cur) => cur.diets.includes(payload));
         return diets;
       };
@@ -397,39 +415,34 @@ function rootReducer(state = initialState, { type, payload }) {
         filterRecipes: filter(payload),
       };
 
-
     case SEARCH_RECIPE_NAME:
-      console.log(payload.length);
       const result = (payload) => {
-        if (!Array.isArray(payload)) return "no es array";
+        if (!Array.isArray(payload)) return "Not result";
         if (payload.length > 0) return payload;
         else console.log("not result");
       };
-      console.log(result(payload))
 
       return {
         ...state,
         recipesAll: result(payload),
       };
-    
 
     case CREATE_RECIPE:
-      console.log("payload",payload)
-      return{
+      return {
         ...state,
-        recipesAll:[...state.recipesAll,payload],
-
-        filterRecipes:[...state.filterRecipes,payload],
-        copyRecipesAll:[...state.copyRecipesAll,payload]
+        recipesAll: [...state.recipesAll, payload],
+        filterRecipes: [...state.filterRecipes, payload],
+        copyRecipesAll: [...state.copyRecipesAll, payload],
+        recipeDB:[...state.recipeDB,payload]
 
       };
 
     case DIETS:
-      const filterDiets=payload.map(cur=>cur.name);
+      const filterDiets = payload.map((cur) => cur.name);
       return {
         ...state,
-        diets:filterDiets
-      }
+        diets: filterDiets,
+      };
     default:
       return state;
   }
