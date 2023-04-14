@@ -20,7 +20,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 //prueba
-router.get("/test", (req, res) => {
+router.get("/", (req, res) => {
   try {
     console.log(YOUR_API_KEY);
     res.status(200).send("todo ok");
