@@ -8,7 +8,8 @@ import CreateRecipe from "./Components/Create Recipe/CreateRecipe";
 import About from "./Components/About/About";
 import Error from "./Components/Error/Error";
 import axios from 'axios';
-axios.defaults.baseURL='http://localhost:3001/';
+//axios.defaults.baseURL='http://localhost:3001/';
+axios.defaults.baseURL='https://food-pi-production-6cae.up.railway.app/';
 
 function App() {
   const location = useLocation();
