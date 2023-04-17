@@ -5,7 +5,9 @@ import {
   FILTER_RECIPES,
   SEARCH_RECIPE_NAME,
   CREATE_RECIPE,
-  DIETS
+  DIETS,
+  RECIPES_DB,
+  LOCALES_RECIPES
 } from "./actionTypes";
 import axios from "axios";
 
@@ -93,3 +95,31 @@ export function diets(){
     }
   }
 }
+
+export function recipesDB(){
+  return async function(dispatch){
+    try {
+      const result=await axios('recipesDB');
+      dispatch({
+        type:RECIPES_DB,
+        payload:result.data
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+};
+
+export function recipesLocales(){
+  return async function(dispatch){
+    try {
+      const result=await axios('recipesApi');
+      dispatch({
+        type:LOCALES_RECIPES,
+        payload:result.data
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+};

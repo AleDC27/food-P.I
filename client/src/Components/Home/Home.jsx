@@ -5,16 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "../SearchBar/SearchBar";
 import Paginacion from "../Paginacion/Paginacion";
 import Loading from "../Loading/Loaging";
-import { orderRecipes, filterRecipes } from "../redux/action/action";
+import { orderRecipes, filterRecipes,recipesDB,recipesLocales,recipes } from "../redux/action/action";
 
 export function Home() {
   const dispatch = useDispatch();
   const [loading,setLoading]=useState(true);
 
-  const handleDispatch = (e) => {
+  const handleDispatch = async(e) => {
+    setLoading(true)
     const { name, value } = e.target;
+    if(value==="Locales")return dispatch(recipesLocales())
+    if(value==="Created")return dispatch(recipesDB())
+    if(value==="All diets")return dispatch(recipes())
+
     if (name === "order") return dispatch(orderRecipes(value));
     if (name === "filter") return dispatch(filterRecipes(value));
+
   };
 
   const recipesAll = useSelector((state) => state.recipesAll);
@@ -32,13 +38,16 @@ export function Home() {
     }else{
       setLoading(false)
     }
-  })
+  },[recipesAll]);
 
+  const handleSearch=()=>{
+    setPage(1)
+  }
 
   return (
     <div className={s.container}>
 
-<SearchBar />
+<SearchBar handleSearch={handleSearch}/>
 
 <div className={s.filters}>
         <select name="order" onChange={handleDispatch}>

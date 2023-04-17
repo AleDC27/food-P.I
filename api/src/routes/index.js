@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
   } catch (error) {}
 });
 //all api
-router.get("/allRecipes", async (req, res) => {
+router.get("/recipesApi", async (req, res) => {
   try {
     const results = await allRecipes();
     res.status(200).json(results);
@@ -66,7 +66,6 @@ router.get("/recipes/:id", async (req, res) => {
   }
 });
 
-//buscar receta por nombre por query
 //http://localhost:3001/recipes?name=Cannellini Bean and Asparagus Salad with Mushrooms
 router.get("/recipes", async (req, res) => {
   try {

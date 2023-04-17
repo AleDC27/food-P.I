@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { searchRecipeName } from '../redux/action/action';
 import { useState } from 'react';
 
-export default function SearchBar() {
+export default function SearchBar(props) {
    const dispatch=useDispatch();
    const [value,setValue]=useState("");
 
@@ -13,8 +13,9 @@ export default function SearchBar() {
    };
    const handleDispatch=(e)=>{
       e.preventDefault();
-      console.log(value)
+      //console.log(value)
       dispatch(searchRecipeName(value))
+      props.handleSearch();
    };
 
    return (
