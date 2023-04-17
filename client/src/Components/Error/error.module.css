@@ -10,7 +10,17 @@
     border-radius: 150px;
     margin-bottom: 50px;
 }
-.containerd h1{
+.containerd h1 {
     position: fixed;
     top: 500px;
+}
+.link{
+    position: fixed;
+    top: 100px;
+    font-size: 24px;
+    text-decoration: none;
+    border: 1px solid rgb(20, 19, 19);
+    border-radius: 10px;
+    padding: 3px;
+    color: rgb(7, 7, 7);
 }

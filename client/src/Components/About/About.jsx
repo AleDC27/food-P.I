@@ -29,7 +29,7 @@ export default function About() {
           Redux, Express, Jest, SQL, Sequelize, Node.js, PostgreSQL.
         </p>
         <div className={s.logos}>
-        <a href="https://www.linkedin.com/in/walter-alejandro-gordillo-487293258/" target="blank"><img src={linkeding} alt="" /></a>
+        <a href="https://www.linkedin.com/in/alejandro-gordillo-487293258/" target="blank"><img src={linkeding} alt="" /></a>
         <a href="https://github.com/AleDC27/food-P.I" target="blank"><img src={gitHub} alt="" /></a>
         </div>
       </div>
